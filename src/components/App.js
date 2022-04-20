@@ -10,9 +10,7 @@ function App() {
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
     const [isCardPopupOpen, setIsCardPopupOpen] = React.useState(false);
     function handleEditProfileClick() {
-        console.log("click")
         setIsEditProfilePopupOpen(true);
-        console.log(isEditProfilePopupOpen)
       }
     
       function handleEditAvatarClick() {
@@ -26,6 +24,13 @@ function App() {
       function handleCardClick() {
         setIsCardPopupOpen(true);
       }
+
+      function closeAllPopups() {
+        setIsEditProfilePopupOpen(false);
+        setIsAddPlacePopupOpen(false);
+        setIsEditAvatarPopupOpen(false);
+        setIsCardPopupOpen(false)
+      }
   return (
     <>
     <div className="page__wrapper">
@@ -37,7 +42,7 @@ function App() {
       onCardClick={handleCardClick}
       />
         <Footer />
-        <PopupWithForm isOpen={isEditProfilePopupOpen} name="edit-profile" title="Edit Profile">
+        <PopupWithForm isOpen={isEditProfilePopupOpen} name="edit-profile" title="Edit Profile" onClose={closeAllPopups}>
                     <input id="input_type_name" type="text" placeholder="Enter your first name" name="popupInputName"
                         minLength="2" maxLength="40" required className="popup__input popup__input_type_name" />
                     <span id="input_type_name-error" className="popup__error">Please fill out this field.</span>
@@ -46,23 +51,14 @@ function App() {
                         className="popup__input popup__input_type_profession" />
                     <span id="input_type_profession-error" className="popup__error">Please fill out this field.</span>
         </PopupWithForm>
-        <section className="popup popup_type_add-card">
-            <div className="popup__content">
-                <button aria-label="close" type="button" name="popupAddCardCloseButton"
-                    className="popup__close-button"></button>
-                <h2 className="popup__title">New place</h2>
-                <form name="addCardForm" className="popup__form">
+        <PopupWithForm isOpen={isAddPlacePopupOpen} name="add-card" title="New place" onClose={closeAllPopups}>
                     <input id="input_type_card-title" type="text" placeholder="Title" name="popupInputCardTitle"
                         minLength="1" maxLength="30" required className="popup__input popup__input_type_card-title" />
                     <span id="input_type_card-title-error" className="popup__error">Please fill out this field.</span>
                     <input id="input_type_card-link" type="url" placeholder="Image link" name="popupInputCardLink"
                         required className="popup__input popup__input_type_card-link" />
                     <span id="input_type_card-link-error" className="popup__error">Please enter a web address.</span>
-                    <button aria-label="save" type="submit" name="popupSaveButton"
-                        className="popup__save-button popup__save-button_disabled">Create</button>
-                </form>
-            </div>
-        </section>
+        </PopupWithForm>
         <section className="popup popup_type_image-popup">
             <div className="popup__image-wrap">
                 <div className="popup__image">
@@ -83,20 +79,11 @@ function App() {
                 </form>
             </div>
         </section>
-        <section className="popup popup_type_avatar-popup">
-            <div className="popup__content">
-                <button aria-label="close" type="button" name="popupAddCardCloseButton"
-                    className="popup__close-button"></button>
-                <h2 className="popup__title">Change profile picture</h2>
-                <form name="avatarForm" className="popup__form">
+        <PopupWithForm isOpen={isEditAvatarPopupOpen} name="avatar-popup" title="Change profile picture" onClose={closeAllPopups}>
                     <input id="input_type_avatar" type="url" placeholder="Image link" name="popupInputAvatar" required
                         className="popup__input popup__input_type_card-link" />
                     <span id="input_type_avatar-error" className="popup__error">Please enter a web address.</span>
-                    <button aria-label="save" type="submit" name="popupSaveButton"
-                        className="popup__save-button">Save</button>
-                </form>
-            </div>
-        </section>
+        </PopupWithForm>
     <template id="card-template">
         <li className="card">
             <div className="card__picture"><button aria-label="delete" type="button" name="cardDeleteButton"
