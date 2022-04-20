@@ -2,32 +2,50 @@ import React from "react";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
+import PopupWithForm from "./PopupWithForm";
 
 function App() {
+    const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+    const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+    const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+    const [isCardPopupOpen, setIsCardPopupOpen] = React.useState(false);
+    function handleEditProfileClick() {
+        console.log("click")
+        setIsEditProfilePopupOpen(true);
+        console.log(isEditProfilePopupOpen)
+      }
+    
+      function handleEditAvatarClick() {
+        setIsEditAvatarPopupOpen(true);
+      }
+    
+      function handleAddPlaceClick() {
+        setIsAddPlacePopupOpen(true);
+      }
+
+      function handleCardClick() {
+        setIsCardPopupOpen(true);
+      }
   return (
     <>
     <div className="page__wrapper">
       <Header />
-      <Main />
+      <Main
+      onEditProfileClick={handleEditProfileClick}
+      onAddPlaceClick={handleAddPlaceClick}
+      onEditAvatarClick={handleEditAvatarClick}
+      onCardClick={handleCardClick}
+      />
         <Footer />
-        <section className="popup popup_type_edit-profile">
-            <div className="popup__content">
-                <button aria-label="close" type="button" name="popupEditProfileCloseButton"
-                    className="popup__close-button"></button>
-                <h2 className="popup__title">Edit profile</h2>
-                <form name="editProfileForm" className="popup__form">
+        <PopupWithForm isOpen={isEditProfilePopupOpen} name="edit-profile" title="Edit Profile">
                     <input id="input_type_name" type="text" placeholder="Enter your first name" name="popupInputName"
-                        minlength="2" maxlength="40" required className="popup__input popup__input_type_name" />
+                        minLength="2" maxLength="40" required className="popup__input popup__input_type_name" />
                     <span id="input_type_name-error" className="popup__error">Please fill out this field.</span>
                     <input id="input_type_profession" type="text" placeholder="Your profession"
-                        name="popupInputProfession" minlength="2" maxlength="200" required
+                        name="popupInputProfession" minLength="2" maxLength="200" required
                         className="popup__input popup__input_type_profession" />
                     <span id="input_type_profession-error" className="popup__error">Please fill out this field.</span>
-                    <button aria-label="save" type="submit" name="popupSaveButton"
-                        className="popup__save-button popup__save-button_disabled">Save</button>
-                </form>
-            </div>
-        </section>
+        </PopupWithForm>
         <section className="popup popup_type_add-card">
             <div className="popup__content">
                 <button aria-label="close" type="button" name="popupAddCardCloseButton"
@@ -35,7 +53,7 @@ function App() {
                 <h2 className="popup__title">New place</h2>
                 <form name="addCardForm" className="popup__form">
                     <input id="input_type_card-title" type="text" placeholder="Title" name="popupInputCardTitle"
-                        minlength="1" maxlength="30" required className="popup__input popup__input_type_card-title" />
+                        minLength="1" maxLength="30" required className="popup__input popup__input_type_card-title" />
                     <span id="input_type_card-title-error" className="popup__error">Please fill out this field.</span>
                     <input id="input_type_card-link" type="url" placeholder="Image link" name="popupInputCardLink"
                         required className="popup__input popup__input_type_card-link" />
@@ -79,7 +97,6 @@ function App() {
                 </form>
             </div>
         </section>
-    </div>
     <template id="card-template">
         <li className="card">
             <div className="card__picture"><button aria-label="delete" type="button" name="cardDeleteButton"
@@ -93,6 +110,7 @@ function App() {
             </div>
         </li>
     </template>
+    </div>
     </>
   );
 }
