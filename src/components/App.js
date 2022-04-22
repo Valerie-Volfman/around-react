@@ -5,99 +5,167 @@ import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 
 function App() {
-    const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
-    const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-    const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-    const [isCardPopupOpen, setIsCardPopupOpen] = React.useState(false);
-    function handleEditProfileClick() {
-        setIsEditProfilePopupOpen(true);
-      }
-    
-      function handleEditAvatarClick() {
-        setIsEditAvatarPopupOpen(true);
-      }
-    
-      function handleAddPlaceClick() {
-        setIsAddPlacePopupOpen(true);
-      }
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
+    React.useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
+    React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState(false);
+  function handleEditProfileClick() {
+    setIsEditProfilePopupOpen(true);
+  }
 
-      function handleCardClick() {
-        setIsCardPopupOpen(true);
-      }
+  function handleEditAvatarClick() {
+    setIsEditAvatarPopupOpen(true);
+  }
 
-      function closeAllPopups() {
-        setIsEditProfilePopupOpen(false);
-        setIsAddPlacePopupOpen(false);
-        setIsEditAvatarPopupOpen(false);
-        setIsCardPopupOpen(false)
-      }
+  function handleAddPlaceClick() {
+    setIsAddPlacePopupOpen(true);
+  }
+
+  function handleCardClick() {
+    setSelectedCard(true);
+  }
+
+  function closeAllPopups() {
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+    setSelectedCard(false);
+  }
   return (
     <>
-    <div className="page__wrapper">
-      <Header />
-      <Main
-      onEditProfileClick={handleEditProfileClick}
-      onAddPlaceClick={handleAddPlaceClick}
-      onEditAvatarClick={handleEditAvatarClick}
-      onCardClick={handleCardClick}
-      />
+      <div className="page__wrapper">
+        <Header />
+        <Main
+          onEditProfileClick={handleEditProfileClick}
+          onAddPlaceClick={handleAddPlaceClick}
+          onEditAvatarClick={handleEditAvatarClick}
+          onCardClick={handleCardClick}
+        />
         <Footer />
-        <PopupWithForm isOpen={isEditProfilePopupOpen} name="edit-profile" title="Edit Profile" onClose={closeAllPopups}>
-                    <input id="input_type_name" type="text" placeholder="Enter your first name" name="popupInputName"
-                        minLength="2" maxLength="40" required className="popup__input popup__input_type_name" />
-                    <span id="input_type_name-error" className="popup__error">Please fill out this field.</span>
-                    <input id="input_type_profession" type="text" placeholder="Your profession"
-                        name="popupInputProfession" minLength="2" maxLength="200" required
-                        className="popup__input popup__input_type_profession" />
-                    <span id="input_type_profession-error" className="popup__error">Please fill out this field.</span>
+        <PopupWithForm
+          isOpen={isEditProfilePopupOpen}
+          name="edit-profile"
+          title="Edit Profile"
+          onClose={closeAllPopups}
+        >
+          <input
+            id="input_type_name"
+            type="text"
+            placeholder="Enter your first name"
+            name="popupInputName"
+            minLength="2"
+            maxLength="40"
+            required
+            className="popup__input popup__input_type_name"
+          />
+          <span id="input_type_name-error" className="popup__error">
+            Please fill out this field.
+          </span>
+          <input
+            id="input_type_profession"
+            type="text"
+            placeholder="Your profession"
+            name="popupInputProfession"
+            minLength="2"
+            maxLength="200"
+            required
+            className="popup__input popup__input_type_profession"
+          />
+          <span id="input_type_profession-error" className="popup__error">
+            Please fill out this field.
+          </span>
         </PopupWithForm>
-        <PopupWithForm isOpen={isAddPlacePopupOpen} name="add-card" title="New place" onClose={closeAllPopups}>
-                    <input id="input_type_card-title" type="text" placeholder="Title" name="popupInputCardTitle"
-                        minLength="1" maxLength="30" required className="popup__input popup__input_type_card-title" />
-                    <span id="input_type_card-title-error" className="popup__error">Please fill out this field.</span>
-                    <input id="input_type_card-link" type="url" placeholder="Image link" name="popupInputCardLink"
-                        required className="popup__input popup__input_type_card-link" />
-                    <span id="input_type_card-link-error" className="popup__error">Please enter a web address.</span>
+        <PopupWithForm
+          isOpen={isAddPlacePopupOpen}
+          name="add-card"
+          title="New place"
+          onClose={closeAllPopups}
+        >
+          <input
+            id="input_type_card-title"
+            type="text"
+            placeholder="Title"
+            name="popupInputCardTitle"
+            minLength="1"
+            maxLength="30"
+            required
+            className="popup__input popup__input_type_card-title"
+          />
+          <span id="input_type_card-title-error" className="popup__error">
+            Please fill out this field.
+          </span>
+          <input
+            id="input_type_card-link"
+            type="url"
+            placeholder="Image link"
+            name="popupInputCardLink"
+            required
+            className="popup__input popup__input_type_card-link"
+          />
+          <span id="input_type_card-link-error" className="popup__error">
+            Please enter a web address.
+          </span>
         </PopupWithForm>
-        <section className="popup popup_type_image-popup">
-            <div className="popup__image-wrap">
-                <div className="popup__image">
-                    <button aria-label="close" type="button" name="popupImageCloseButton"
-                        className="popup__close-button"></button>
-                    <h2 className="popup__image-title"></h2>
-                </div>
+        <PopupWithForm
+          isOpen={selectedCard}
+          onClose={closeAllPopups}
+          className="popup popup_type_image-popup"
+        >
+          <div className="popup__image-wrap">
+            <div className="popup__image">
+              <button
+                aria-label="close"
+                type="button"
+                name="popupImageCloseButton"
+                className="popup__close-button"
+              ></button>
+              <h2 className="popup__image-title"></h2>
             </div>
-        </section>
+          </div>
+        </PopupWithForm>
         <section className="popup popup_type_remove-popup">
-            <div className="popup__content">
-                <button aria-label="close" type="button" name="popupAddCardCloseButton"
-                    className="popup__close-button"></button>
-                <h2 className="popup__title">Are you sure?</h2>
-                <form id="delete-popup" name="removePopup" className="popup__form">
-                    <button form="delete-popup" aria-label="save" type="submit" name="popupSaveButton"
-                        className="popup__save-button">Yes</button>
-                </form>
-            </div>
+          <div className="popup__content">
+            <button
+              aria-label="close"
+              type="button"
+              name="popupAddCardCloseButton"
+              className="popup__close-button"
+            ></button>
+            <h2 className="popup__title">Are you sure?</h2>
+            <form id="delete-popup" name="removePopup" className="popup__form">
+              <button
+                form="delete-popup"
+                aria-label="save"
+                type="submit"
+                name="popupSaveButton"
+                className="popup__save-button"
+              >
+                Yes
+              </button>
+            </form>
+          </div>
         </section>
-        <PopupWithForm isOpen={isEditAvatarPopupOpen} name="avatar-popup" title="Change profile picture" onClose={closeAllPopups}>
-                    <input id="input_type_avatar" type="url" placeholder="Image link" name="popupInputAvatar" required
-                        className="popup__input popup__input_type_card-link" />
-                    <span id="input_type_avatar-error" className="popup__error">Please enter a web address.</span>
+        <PopupWithForm
+          isOpen={isEditAvatarPopupOpen}
+          name="avatar-popup"
+          title="Change profile picture"
+          onClose={closeAllPopups}
+        >
+          <input
+            id="input_type_avatar"
+            type="url"
+            placeholder="Image link"
+            name="popupInputAvatar"
+            required
+            className="popup__input popup__input_type_card-link"
+          />
+          <span id="input_type_avatar-error" className="popup__error">
+            Please enter a web address.
+          </span>
         </PopupWithForm>
-    <template id="card-template">
-        <li className="card">
-            <div className="card__picture"><button aria-label="delete" type="button" name="cardDeleteButton"
-                    className="card__delete-button"></button></div>
-            <div className="card__box">
-                <h2 className="card__name"></h2>
-                <div className="card__like-frame">
-                    <button aria-label="like" type="button" name="cardLike" className="card__like"></button>
-                    <span className="card__like-counter"></span>
-                </div>
-            </div>
-        </li>
-    </template>
-    </div>
+      </div>
     </>
   );
 }
