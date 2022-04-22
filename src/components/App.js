@@ -1,8 +1,10 @@
 import React from "react";
 import Header from "./Header";
+import Card from "./Card";
 import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
+import ImagePopup from "./ImagePopup";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
@@ -43,6 +45,7 @@ function App() {
           onEditAvatarClick={handleEditAvatarClick}
           onCardClick={handleCardClick}
         />
+        <Card />
         <Footer />
         <PopupWithForm
           isOpen={isEditProfilePopupOpen}
@@ -107,23 +110,6 @@ function App() {
           <span id="input_type_card-link-error" className="popup__error">
             Please enter a web address.
           </span>
-        </PopupWithForm>
-        <PopupWithForm
-          isOpen={selectedCard}
-          onClose={closeAllPopups}
-          className="popup popup_type_image-popup"
-        >
-          <div className="popup__image-wrap">
-            <div className="popup__image">
-              <button
-                aria-label="close"
-                type="button"
-                name="popupImageCloseButton"
-                className="popup__close-button"
-              ></button>
-              <h2 className="popup__image-title"></h2>
-            </div>
-          </div>
         </PopupWithForm>
         <section className="popup popup_type_remove-popup">
           <div className="popup__content">
