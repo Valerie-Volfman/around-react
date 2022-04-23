@@ -1,9 +1,9 @@
 import React from "react";
 
-function PopupWithForm({ name, title, children, onClose, isOpen }) {
+function PopupWithForm({ name, title, children, onClose, isOpen, buttonText }) {
   return (
     <section
-      className={`popup popup_type_${name} ${isOpen ? "popup__is-opened" : ""}`}
+      className={`popup popup_type_${name} ${isOpen && "popup__is-opened"}`}
     >
       <div className="popup__content">
         <button
@@ -22,7 +22,7 @@ function PopupWithForm({ name, title, children, onClose, isOpen }) {
             name="popupSaveButton"
             className="popup__save-button popup__save-button_disabled"
           >
-            Save
+            {buttonText}
           </button>
         </form>
       </div>

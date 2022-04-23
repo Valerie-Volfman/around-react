@@ -1,10 +1,10 @@
 import React from "react";
 import Header from "./Header";
-import Card from "./Card";
 import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
+
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
@@ -12,7 +12,8 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
     React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState(null);
+  
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
   }
@@ -33,7 +34,7 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
-    setSelectedCard(false);
+    setSelectedCard(null);
   }
   return (
     <>
@@ -45,13 +46,13 @@ function App() {
           onEditAvatarClick={handleEditAvatarClick}
           onCardClick={handleCardClick}
         />
-        <Card />
         <Footer />
         <PopupWithForm
           isOpen={isEditProfilePopupOpen}
           name="edit-profile"
           title="Edit Profile"
           onClose={closeAllPopups}
+          buttonText='Save'
         >
           <input
             id="input_type_name"
