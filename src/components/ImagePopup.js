@@ -7,7 +7,8 @@ function ImagePopup({ closeAllPopups, card }) {
       className={`popup popup_type_image-popup ${card && "popup__is-opened"}`}
     >
       <div className="popup__image-wrap">
-        <div className="popup__image">
+        <div
+         className="popup__image">
           <button
             aria-label="close"
             type="button"

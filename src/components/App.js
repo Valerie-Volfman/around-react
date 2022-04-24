@@ -25,8 +25,8 @@ function App() {
     setIsAddPlacePopupOpen(true);
   }
 
-  function handleCardClick() {
-    setSelectedCard(true);
+  function handleCardClick(data) {
+    setSelectedCard(data);
   }
 
   function closeAllPopups() {
@@ -46,6 +46,7 @@ function App() {
           onCardClick={handleCardClick}
         />
         <Footer />
+        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
         <PopupWithForm
           isOpen={isEditProfilePopupOpen}
           name="edit-profile"
