@@ -5,7 +5,6 @@ import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 
-
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
     React.useState(false);
@@ -13,7 +12,7 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
     React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(null);
-  
+
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
   }
@@ -52,7 +51,7 @@ function App() {
           name="edit-profile"
           title="Edit Profile"
           onClose={closeAllPopups}
-          buttonText='Save'
+          buttonText="Save"
         >
           <input
             id="input_type_name"
@@ -86,6 +85,7 @@ function App() {
           name="add-card"
           title="New place"
           onClose={closeAllPopups}
+          buttonText="Save"
         >
           <input
             id="input_type_card-title"
@@ -139,6 +139,7 @@ function App() {
           name="avatar-popup"
           title="Change profile picture"
           onClose={closeAllPopups}
+          buttonText="Save"
         >
           <input
             id="input_type_avatar"

@@ -3,8 +3,12 @@ import editAvatarIcon from "../images/Avatar.svg";
 import api from "../utils/api";
 import Card from "./Card";
 
-
-function Main({ onEditAvatarClick, onEditProfileClick, onAddPlaceClick, handleClick }) {
+function Main({
+  onEditAvatarClick,
+  onEditProfileClick,
+  onAddPlaceClick,
+  onCardClick,
+}) {
   const [userName, setUserName] = React.useState("");
   const [userDescription, setUserDescription] = React.useState("");
   const [userAvatar, setUserAvatar] = React.useState("");
@@ -27,13 +31,12 @@ function Main({ onEditAvatarClick, onEditProfileClick, onAddPlaceClick, handleCl
     api
       .getInitialCards()
       .then((res) => {
-        setCards([res]);
+        setCards(res);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        console.log(err);
       });
   }, []);
-  console.log(cards.link)
   return (
     <main className="main">
       <section className="profile">
@@ -49,14 +52,14 @@ function Main({ onEditAvatarClick, onEditProfileClick, onAddPlaceClick, handleCl
           <div
             onClick={onEditAvatarClick}
             className="profile__pic"
-            style={{ backgroundImage: `url(${userAvatar.avatar})` }}
+            style={{ backgroundImage: `url(${userAvatar})` }}
           ></div>
         </div>
         <div className="profile__container">
           <div className="profile__info">
             <div className="profile__name">
               <h1 className="profile__value profile__value_type_name">
-                {userName.name}
+                {userName}
               </h1>
               <button
                 onClick={onEditProfileClick}
@@ -67,7 +70,7 @@ function Main({ onEditAvatarClick, onEditProfileClick, onAddPlaceClick, handleCl
               ></button>
             </div>
             <p className="profile__value profile__value_type_profession">
-              {userDescription.about}
+              {userDescription}
             </p>
           </div>
         </div>
@@ -80,13 +83,12 @@ function Main({ onEditAvatarClick, onEditProfileClick, onAddPlaceClick, handleCl
         ></button>
       </section>
       <section className="places">
-      <ul className="places__cards">
-        {cards.map((card) => (
-          console.log(cards),
-          <Card key={card} card={card} id="card-template" handleCardClick={handleClick} />
-        ))}
-      </ul>
-    </section>
+        <ul className="places__cards">
+          {cards.map((item) => (
+            <Card key={item._id} card={item} onCardClick={onCardClick} />
+          ))}
+        </ul>
+      </section>
     </main>
   );
 }

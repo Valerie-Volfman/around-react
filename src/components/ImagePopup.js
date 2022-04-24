@@ -1,11 +1,10 @@
 import React from "react";
 
-function ImagePopup({ selectedCard, closeAllPopups }) {
+function ImagePopup({ closeAllPopups, card }) {
   return (
     <section
-      isOpen={selectedCard}
       onClose={closeAllPopups}
-      className="popup popup_type_image-popup"
+      className={`popup popup_type_image-popup ${card && "popup__is-opened"}`}
     >
       <div className="popup__image-wrap">
         <div className="popup__image">
