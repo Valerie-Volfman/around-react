@@ -2,6 +2,7 @@ import React from "react";
 import editAvatarIcon from "../images/Avatar.svg";
 import api from "../utils/api";
 import Card from "./Card";
+import CurrentUserContext from "../context/CurrentUserContext";
 
 function Main({
   onEditAvatarClick,
@@ -11,21 +12,27 @@ function Main({
 }) {
   const [userName, setUserName] = React.useState("");
   const [userDescription, setUserDescription] = React.useState("");
-  const [userAvatar, setUserAvatar] = React.useState("");
+  // const [userAvatar, setUserAvatar] = React.useState("");
   const [cards, setCards] = React.useState([]);
+  const currentUser = React.useContext(CurrentUserContext);
+
 
   React.useEffect(() => {
-    api
-      .getUserData()
-      .then((res) => {
-        setUserName(res.name);
-        setUserAvatar(res.avatar);
-        setUserDescription(res.about);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+    setUserName(currentUser.name);
+    setUserDescription(currentUser.about);
+  }, [currentUser]);
+  // React.useEffect(() => {
+  //   api
+  //     .getUserData()
+  //     .then((res) => {
+  //       setUserName(currentUser.name);
+  //       setUserAvatar(currentUser.avatar);
+  //       setUserDescription(currentUser.about);
+  //     }
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
 
   React.useEffect(() => {
     api
@@ -52,14 +59,14 @@ function Main({
           <div
             onClick={onEditAvatarClick}
             className="profile__pic"
-            style={{ backgroundImage: `url(${userAvatar})` }}
+            style={{ backgroundImage: `url(${currentUser.avatar})` }}
           ></div>
         </div>
         <div className="profile__container">
           <div className="profile__info">
             <div className="profile__name">
               <h1 className="profile__value profile__value_type_name">
-                {userName}
+                {currentUser.name}
               </h1>
               <button
                 onClick={onEditProfileClick}
@@ -70,7 +77,7 @@ function Main({
               ></button>
             </div>
             <p className="profile__value profile__value_type_profession">
-              {userDescription}
+              {currentUser.about}
             </p>
           </div>
         </div>

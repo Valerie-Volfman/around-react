@@ -4,6 +4,7 @@ import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
+import CurrentUserContext from "../context/CurrentUserContext";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
@@ -12,6 +13,7 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
     React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(null);
+  const [currentUser, setCurrentUser] = React.useState({});
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
@@ -38,6 +40,7 @@ function App() {
   return (
     <>
       <div className="page__wrapper">
+        <CurrentUserContext.Provider value={currentUser}>
         <Header />
         <Main
           onEditProfileClick={handleEditProfileClick}
@@ -154,6 +157,7 @@ function App() {
             Please enter a web address.
           </span>
         </PopupWithForm>
+        </CurrentUserContext.Provider>
       </div>
     </>
   );

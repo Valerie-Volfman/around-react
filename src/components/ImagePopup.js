@@ -1,6 +1,7 @@
 import React from "react";
 
-function ImagePopup({ closeAllPopups, card }) {
+function ImagePopup({ closeAllPopups, card}) {
+  console.log(card)
   return (
     <section
       onClose={closeAllPopups}
@@ -8,6 +9,7 @@ function ImagePopup({ closeAllPopups, card }) {
     >
       <div className="popup__image-wrap">
         <div
+        style={{ backgroundImage: `url(${card.link})` }}
          className="popup__image">
           <button
             aria-label="close"
@@ -15,7 +17,7 @@ function ImagePopup({ closeAllPopups, card }) {
             name="popupImageCloseButton"
             className="popup__close-button"
           ></button>
-          <h2 className="popup__image-title"></h2>
+          <h2 className="popup__image-title">{card.name}</h2>
         </div>
       </div>
     </section>

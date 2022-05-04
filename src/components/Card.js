@@ -1,9 +1,18 @@
 import React from "react";
+import CurrentUserContext from "../context/CurrentUserContext";
 
 function Card({ card, onCardClick }) {
   function handleClick() {
     onCardClick(card);
   }
+  const currentUser = React.useContext(CurrentUserContext);
+  // Checking if the current user is the owner of the current card
+const isOwn = card.owner._id === currentUser._id;
+
+// Creating a variable which you'll then set in `className` for the delete button
+const cardDeleteButtonClassName = (
+  `card__delete-button ${isOwn ? 'card__delete-button_visible' : 'card__delete-button_hidden'}`
+); 
   return (
     <li className="card">
       <div
@@ -16,6 +25,7 @@ function Card({ card, onCardClick }) {
           type="button"
           name="cardDeleteButton"
           className="card__delete-button"
+          onClick={cardDeleteButtonClassName}
         ></button>
       </div>
       <div className="card__box">
