@@ -1,17 +1,20 @@
 import React from "react";
 import CurrentUserContext from "../context/CurrentUserContext";
 
-function Card({ card, onCardClick }) {
+function Card({ card, onCardClick, onLikeClick }) {
   function handleClick() {
     onCardClick(card);
   }
   const currentUser = React.useContext(CurrentUserContext);
-  // Checking if the current user is the owner of the current card
-const isOwn = card.owner._id === currentUser._id;
 
-// Creating a variable which you'll then set in `className` for the delete button
+  const isLiked = card.likes.some(user => user._id === currentUser._id);
+  const cardLikeButtonClassName = (
+    `card__like ${isLiked ? 'card__like_active' : 'card__like'}`
+  );
+
+const isOwn = card.owner._id === currentUser._id;
 const cardDeleteButtonClassName = (
-  `card__delete-button ${isOwn ? 'card__delete-button_visible' : 'card__delete-button_hidden'}`
+  `card__delete-button ${isOwn ? 'card__delete-button' : 'card__delete-button_hidden'}`
 ); 
   return (
     <li className="card">
@@ -24,8 +27,7 @@ const cardDeleteButtonClassName = (
           aria-label="delete"
           type="button"
           name="cardDeleteButton"
-          className="card__delete-button"
-          onClick={cardDeleteButtonClassName}
+          className={cardDeleteButtonClassName}
         ></button>
       </div>
       <div className="card__box">
@@ -35,7 +37,8 @@ const cardDeleteButtonClassName = (
             aria-label="like"
             type="button"
             name="cardLike"
-            className="card__like"
+            className={cardLikeButtonClassName}
+            onClick={onLikeClick}
           ></button>
           <span className="card__like-counter">{card.likes.length}</span>
         </div>

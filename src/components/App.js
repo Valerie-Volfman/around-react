@@ -4,6 +4,7 @@ import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
+import api from "../utils/api";
 import CurrentUserContext from "../context/CurrentUserContext";
 
 function App() {
@@ -14,6 +15,17 @@ function App() {
     React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(null);
   const [currentUser, setCurrentUser] = React.useState({});
+
+React.useEffect(() => {
+    api
+      .getUserData()
+      .then((res) => {
+        setCurrentUser(res)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
