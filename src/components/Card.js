@@ -5,11 +5,15 @@ function Card({ card, onCardClick, onLikeClick }) {
   function handleClick() {
     onCardClick(card);
   }
+
+  function handleLikeClick() {
+    onLikeClick(card);
+  }
   const currentUser = React.useContext(CurrentUserContext);
 
   const isLiked = card.likes.some(user => user._id === currentUser._id);
   const cardLikeButtonClassName = (
-    `card__like ${isLiked ? 'card__like_active' : 'card__like'}`
+    `"card__like" ${isLiked ? "card__like_active" : "card__like"}`
   );
 
 const isOwn = card.owner._id === currentUser._id;
@@ -38,7 +42,7 @@ const cardDeleteButtonClassName = (
             type="button"
             name="cardLike"
             className={cardLikeButtonClassName}
-            onClick={onLikeClick}
+            onClick={handleLikeClick}
           ></button>
           <span className="card__like-counter">{card.likes.length}</span>
         </div>

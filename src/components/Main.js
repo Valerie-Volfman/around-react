@@ -9,41 +9,12 @@ function Main({
   onEditProfileClick,
   onAddPlaceClick,
   onCardClick,
+  cards,
+  onLikeClick,
 }) {
-  const [userName, setUserName] = React.useState("");
-  const [userDescription, setUserDescription] = React.useState("");
-  // const [userAvatar, setUserAvatar] = React.useState("");
-  const [cards, setCards] = React.useState([]);
+  
   const currentUser = React.useContext(CurrentUserContext);
-
-
-  React.useEffect(() => {
-    setUserName(currentUser.name);
-    setUserDescription(currentUser.about);
-  }, [currentUser]);
-  // React.useEffect(() => {
-  //   api
-  //     .getUserData()
-  //     .then((res) => {
-  //       setUserName(currentUser.name);
-  //       setUserAvatar(currentUser.avatar);
-  //       setUserDescription(currentUser.about);
-  //     }
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
-
-  React.useEffect(() => {
-    api
-      .getInitialCards()
-      .then((res) => {
-        setCards(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  
   return (
     <main className="main">
       <section className="profile">
@@ -92,7 +63,7 @@ function Main({
       <section className="places">
         <ul className="places__cards">
           {cards.map((item) => (
-            <Card key={item._id} card={item} onCardClick={onCardClick} />
+            <Card onLikeClick={onLikeClick} key={item._id} card={item} onCardClick={onCardClick} />
           ))}
         </ul>
       </section>

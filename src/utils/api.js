@@ -72,6 +72,14 @@ class Api extends React.Component {
       }
     );
 
+    return this._getResponseData(response.json());
+  }
+
+  async changeLikeCardStatus(userData, isLiked) {
+    const response = await fetch(!isLiked ? this.addLikes(userData) : this.removeLikes(userData), {
+      headers: this._headers,
+        'Accept': 'application/json'
+    })
     return this._getResponseData(response);
   }
 
