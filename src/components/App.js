@@ -49,13 +49,13 @@ React.useEffect(() => {
     });
 }, []);
 
-function handleUserUpdate(name, about) {
+function handleUserUpdate(data) {
   
   api
-  .editUserData(name, about)
-  console.log(name, about)
+  .editUserData(data)
   .then((res) => {
     setCurrentUser(res);
+    console.log(res)
     closeAllPopups();
   })
   .catch((err) => {

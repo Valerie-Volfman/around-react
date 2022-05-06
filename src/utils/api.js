@@ -15,7 +15,7 @@ class Api extends React.Component {
     return this._getResponseData(response);
   }
 
-  async editUserData(name, about) {
+  async editUserData({name, about}) {
     const response = await fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,

@@ -27,7 +27,6 @@ function handleSubmit(e) {
 
 React.useEffect(() => {
     setName(currentUser.name);
-    console.log(currentUser)
     setProfession(currentUser.about);
   }, [currentUser]);
 
