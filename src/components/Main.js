@@ -1,8 +1,7 @@
 import React from "react";
 import editAvatarIcon from "../images/Avatar.svg";
-import api from "../utils/api";
 import Card from "./Card";
-import CurrentUserContext from "../context/CurrentUserContext";
+import CurrentUserContext from "../contexts/CurrentUserContext";
 
 function Main({
   onEditAvatarClick,
