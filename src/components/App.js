@@ -6,6 +6,7 @@ import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import api from "../utils/api";
 import CurrentUserContext from "../context/CurrentUserContext";
+import EditProfilePopup from "./EditProfilePopup";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
@@ -48,6 +49,20 @@ React.useEffect(() => {
     });
 }, []);
 
+function handleUserUpdate(name, about) {
+  
+  api
+  .editUserData(name, about)
+  console.log(name, about)
+  .then((res) => {
+    setCurrentUser(res);
+    closeAllPopups();
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+}
+
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
   }
@@ -85,40 +100,10 @@ React.useEffect(() => {
         />
         <Footer />
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-        <PopupWithForm
-          isOpen={isEditProfilePopupOpen}
-          name="edit-profile"
-          title="Edit Profile"
-          onClose={closeAllPopups}
-          buttonText="Save"
-        >
-          <input
-            id="input_type_name"
-            type="text"
-            placeholder="Enter your first name"
-            name="popupInputName"
-            minLength="2"
-            maxLength="40"
-            required
-            className="popup__input popup__input_type_name"
-          />
-          <span id="input_type_name-error" className="popup__error">
-            Please fill out this field.
-          </span>
-          <input
-            id="input_type_profession"
-            type="text"
-            placeholder="Your profession"
-            name="popupInputProfession"
-            minLength="2"
-            maxLength="200"
-            required
-            className="popup__input popup__input_type_profession"
-          />
-          <span id="input_type_profession-error" className="popup__error">
-            Please fill out this field.
-          </span>
-        </PopupWithForm>
+        <EditProfilePopup
+        isOpen={isEditProfilePopupOpen}
+        onClose={closeAllPopups}
+        onUpdateUser={handleUserUpdate} />
         <PopupWithForm
           isOpen={isAddPlacePopupOpen}
           name="add-card"

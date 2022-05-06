@@ -72,15 +72,11 @@ class Api extends React.Component {
       }
     );
 
-    return this._getResponseData(response.json());
+    return this._getResponseData(response);
   }
 
   async changeLikeCardStatus(userData, isLiked) {
-    const response = await fetch(!isLiked ? this.addLikes(userData) : this.removeLikes(userData), {
-      headers: this._headers,
-        'Accept': 'application/json'
-    })
-    return this._getResponseData(response);
+      return !isLiked ? this.addLikes(userData) : this.removeLikes(userData);
   }
 
   async removeCard(userData) {
@@ -113,7 +109,6 @@ class Api extends React.Component {
         response.statusText
       );
     }
-
     return response.json();
   }
 }
