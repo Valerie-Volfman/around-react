@@ -12,9 +12,8 @@ function Main({
   cards,
   onLikeClick,
 }) {
-  
   const currentUser = React.useContext(CurrentUserContext);
-  
+
   return (
     <main className="main">
       <section className="profile">
@@ -63,7 +62,12 @@ function Main({
       <section className="places">
         <ul className="places__cards">
           {cards.map((item) => (
-            <Card onLikeClick={onLikeClick} key={item._id} card={item} onCardClick={onCardClick} />
+            <Card
+              onLikeClick={onLikeClick}
+              key={item._id}
+              card={item}
+              onCardClick={onCardClick}
+            />
           ))}
         </ul>
       </section>

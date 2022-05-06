@@ -1,6 +1,6 @@
 import React from "react";
 
-function ImagePopup({ closeAllPopups, card}) {
+function ImagePopup({ closeAllPopups, card }) {
   return (
     <section
       onClose={closeAllPopups}
@@ -8,8 +8,9 @@ function ImagePopup({ closeAllPopups, card}) {
     >
       <div className="popup__image-wrap">
         <div
-        style= { card && {backgroundImage: `url(${card.link})` } }
-         className="popup__image">
+          style={card && { backgroundImage: `url(${card.link})` }}
+          className="popup__image"
+        >
           <button
             aria-label="close"
             type="button"

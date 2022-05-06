@@ -88,7 +88,7 @@ class Api extends React.Component {
     return this._getResponseData(response);
   }
 
-  async editProfilePic(avatar) {
+  async editProfilePic({avatar}) {
     const response = await fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
