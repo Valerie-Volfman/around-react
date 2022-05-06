@@ -15,7 +15,7 @@ class Api extends React.Component {
     return this._getResponseData(response);
   }
 
-  async editUserData({name, about}) {
+  async editUserData({ name, about }) {
     const response = await fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
@@ -37,7 +37,7 @@ class Api extends React.Component {
     return this._getResponseData(response);
   }
 
-  async addCard(name, link) {
+  async addCard({ name, link }) {
     const response = await fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: this._headers,
@@ -76,11 +76,11 @@ class Api extends React.Component {
   }
 
   async changeLikeCardStatus(userData, isLiked) {
-      return !isLiked ? this.addLikes(userData) : this.removeLikes(userData);
+    return !isLiked ? this.addLikes(userData) : this.removeLikes(userData);
   }
 
-  async removeCard(userData) {
-    const response = await fetch(`${this._baseUrl}/cards/${userData}`, {
+  async removeCard(card) {
+    const response = await fetch(`${this._baseUrl}/cards/${card._id}`, {
       method: "DELETE",
       headers: this._headers,
     });
@@ -88,7 +88,7 @@ class Api extends React.Component {
     return this._getResponseData(response);
   }
 
-  async editProfilePic({avatar}) {
+  async editProfilePic({ avatar }) {
     const response = await fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,

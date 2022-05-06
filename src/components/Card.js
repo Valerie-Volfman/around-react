@@ -1,9 +1,13 @@
 import React from "react";
 import CurrentUserContext from "../context/CurrentUserContext";
 
-function Card({ card, onCardClick, onLikeClick }) {
+function Card({ card, onCardClick, onLikeClick, onDeleteClick }) {
   function handleClick() {
     onCardClick(card);
+  }
+
+  function handleDeleteClick() {
+    onDeleteClick(card);
   }
 
   function handleLikeClick() {
@@ -32,6 +36,7 @@ function Card({ card, onCardClick, onLikeClick }) {
           type="button"
           name="cardDeleteButton"
           className={cardDeleteButtonClassName}
+          onClick={handleDeleteClick}
         ></button>
       </div>
       <div className="card__box">

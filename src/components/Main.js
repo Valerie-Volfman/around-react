@@ -11,6 +11,7 @@ function Main({
   onCardClick,
   cards,
   onLikeClick,
+  onDeleteClick,
 }) {
   const currentUser = React.useContext(CurrentUserContext);
 
@@ -63,6 +64,7 @@ function Main({
         <ul className="places__cards">
           {cards.map((item) => (
             <Card
+              onDeleteClick={onDeleteClick}
               onLikeClick={onLikeClick}
               key={item._id}
               card={item}

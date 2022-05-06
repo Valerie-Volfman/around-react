@@ -1,9 +1,8 @@
 import React from "react";
 
-function ImagePopup({ closeAllPopups, card }) {
+function ImagePopup({ onClose, card }) {
   return (
     <section
-      onClose={closeAllPopups}
       className={`popup popup_type_image-popup ${card && "popup__is-opened"}`}
     >
       <div className="popup__image-wrap">
@@ -12,6 +11,7 @@ function ImagePopup({ closeAllPopups, card }) {
           className="popup__image"
         >
           <button
+            onClick={onClose}
             aria-label="close"
             type="button"
             name="popupImageCloseButton"
