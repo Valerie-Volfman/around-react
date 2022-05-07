@@ -2,8 +2,13 @@ import React from "react";
 import PopupWithForm from "./PopupWithForm";
 
 function AddPlacePopup({ isOpen, onClose, onCreateCard }) {
-  const [name, setName] = React.useState(" ");
-  const [link, setLink] = React.useState(" ");
+  const [name, setName] = React.useState("");
+  const [link, setLink] = React.useState("");
+
+  React.useEffect(() => {
+    setName("");
+    setLink("");
+  }, [isOpen]);
 
   function handleName(e) {
     setName(e.target.value);
@@ -40,6 +45,7 @@ function AddPlacePopup({ isOpen, onClose, onCreateCard }) {
         maxLength="30"
         required
         className="popup__input popup__input_type_card-title"
+        value={name.value}
         onChange={handleName}
       />
       <span id="input_type_card-title-error" className="popup__error">
@@ -52,6 +58,7 @@ function AddPlacePopup({ isOpen, onClose, onCreateCard }) {
         name="popupInputCardLink"
         required
         className="popup__input popup__input_type_card-link"
+        value={link.value}
         onChange={handleLink}
       />
       <span id="input_type_card-link-error" className="popup__error">

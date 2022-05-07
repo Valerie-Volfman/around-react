@@ -30,15 +30,15 @@ function Card({ card, onCardClick, onLikeClick, onDeleteClick }) {
         style={{ backgroundImage: `url(${card.link})` }}
         onClick={handleClick}
         className="card__picture"
-      >
-        <button
-          aria-label="delete"
-          type="button"
-          name="cardDeleteButton"
-          className={cardDeleteButtonClassName}
-          onClick={handleDeleteClick}
-        ></button>
-      </div>
+      ></div>
+      <button
+        aria-label="delete"
+        type="button"
+        name="cardDeleteButton"
+        className={cardDeleteButtonClassName}
+        onClick={handleDeleteClick}
+      ></button>
+
       <div className="card__box">
         <h2 className="card__name">{card.name}</h2>
         <div className="card__like-frame">

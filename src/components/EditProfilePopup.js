@@ -3,8 +3,8 @@ import PopupWithForm from "./PopupWithForm";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
 function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
-  const [name, setName] = React.useState(" ");
-  const [profession, setProfession] = React.useState(" ");
+  const [name, setName] = React.useState("");
+  const [profession, setProfession] = React.useState("");
 
   function handleName(e) {
     setName(e.target.value);
@@ -28,7 +28,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   React.useEffect(() => {
     setName(currentUser.name);
     setProfession(currentUser.about);
-  }, [currentUser]);
+  }, [currentUser, isOpen]);
 
   return (
     <PopupWithForm
@@ -40,7 +40,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
       buttonText="Save"
     >
       <input
-        value={name}
+        value={name || ""}
         onChange={handleName}
         id="input_type_name"
         type="text"
@@ -55,7 +55,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
         Please fill out this field.
       </span>
       <input
-        value={profession}
+        value={profession || ""}
         onChange={handleProfession}
         id="input_type_profession"
         type="text"

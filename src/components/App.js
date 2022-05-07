@@ -122,6 +122,18 @@ function App() {
     setSelectedCard(data);
   }
 
+  React.useEffect(() => {
+    const closeByEscape = (e) => {
+      if (e.key === "Escape") {
+        closeAllPopups();
+      }
+    };
+
+    document.addEventListener("keydown", closeByEscape);
+
+    return () => document.removeEventListener("keydown", closeByEscape);
+  }, []);
+
   function closeAllPopups() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
@@ -129,65 +141,59 @@ function App() {
     setSelectedCard(null);
   }
   return (
-    <>
-      <div className="page__wrapper">
-        <CurrentUserContext.Provider value={currentUser}>
-          <Header />
-          <Main
-            onEditProfileClick={handleEditProfileClick}
-            onAddPlaceClick={handleAddPlaceClick}
-            onEditAvatarClick={handleEditAvatarClick}
-            onCardClick={handleCardClick}
-            onLikeClick={handleCardLike}
-            onDeleteClick={handleCardDelete}
-            cards={cards}
-          />
-          <Footer />
-          <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-          <EditProfilePopup
-            isOpen={isEditProfilePopupOpen}
-            onClose={closeAllPopups}
-            onUpdateUser={handleUserUpdate}
-          />
-          <AddPlacePopup
-            isOpen={isAddPlacePopupOpen}
-            onClose={closeAllPopups}
-            onCreateCard={handleAppPlaceSubmit}
-          />
-          <section className="popup popup_type_remove-popup">
-            <div className="popup__content">
+    <div className="page__wrapper">
+      <CurrentUserContext.Provider value={currentUser}>
+        <Header />
+        <Main
+          onEditProfileClick={handleEditProfileClick}
+          onAddPlaceClick={handleAddPlaceClick}
+          onEditAvatarClick={handleEditAvatarClick}
+          onCardClick={handleCardClick}
+          onLikeClick={handleCardLike}
+          onDeleteClick={handleCardDelete}
+          cards={cards}
+        />
+        <Footer />
+        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+        <EditProfilePopup
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
+          onUpdateUser={handleUserUpdate}
+        />
+        <AddPlacePopup
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+          onCreateCard={handleAppPlaceSubmit}
+        />
+        <section className="popup popup_type_remove-popup">
+          <div className="popup__content">
+            <button
+              aria-label="close"
+              type="button"
+              name="popupAddCardCloseButton"
+              className="popup__close-button"
+            ></button>
+            <h2 className="popup__title">Are you sure?</h2>
+            <form id="delete-popup" name="removePopup" className="popup__form">
               <button
-                aria-label="close"
-                type="button"
-                name="popupAddCardCloseButton"
-                className="popup__close-button"
-              ></button>
-              <h2 className="popup__title">Are you sure?</h2>
-              <form
-                id="delete-popup"
-                name="removePopup"
-                className="popup__form"
+                form="delete-popup"
+                aria-label="save"
+                type="submit"
+                name="popupSaveButton"
+                className="popup__save-button"
               >
-                <button
-                  form="delete-popup"
-                  aria-label="save"
-                  type="submit"
-                  name="popupSaveButton"
-                  className="popup__save-button"
-                >
-                  Yes
-                </button>
-              </form>
-            </div>
-          </section>
-          <EditAvatarPopup
-            isOpen={isEditAvatarPopupOpen}
-            onClose={closeAllPopups}
-            onUpdateAvatar={handleUpdateAvatar}
-          />
-        </CurrentUserContext.Provider>
-      </div>
-    </>
+                Yes
+              </button>
+            </form>
+          </div>
+        </section>
+        <EditAvatarPopup
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          onUpdateAvatar={handleUpdateAvatar}
+        />
+      </CurrentUserContext.Provider>
+    </div>
   );
 }
 
