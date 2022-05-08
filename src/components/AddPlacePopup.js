@@ -45,7 +45,7 @@ function AddPlacePopup({ isOpen, onClose, onCreateCard }) {
         maxLength="30"
         required
         className="popup__input popup__input_type_card-title"
-        value={name.value}
+        value={name}
         onChange={handleName}
       />
       <span id="input_type_card-title-error" className="popup__error">
@@ -58,7 +58,7 @@ function AddPlacePopup({ isOpen, onClose, onCreateCard }) {
         name="popupInputCardLink"
         required
         className="popup__input popup__input_type_card-link"
-        value={link.value}
+        value={link}
         onChange={handleLink}
       />
       <span id="input_type_card-link-error" className="popup__error">
